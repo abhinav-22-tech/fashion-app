@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react';
-import { Text, View, Button, StatusBar, Image } from 'react-native';
+import { Text, View, StatusBar, Image } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 
-function WelcomeScreen({ navigation }) {
+function WelcomeScreen() {
   const ring1Padding = useSharedValue(0);
   const ring2Padding = useSharedValue(0);
 
+  // Use Nagivation to go home screen 
+  const navigation = useNavigation();
+
   useEffect(() => {
-    ring1Padding.value = 0;
-    ring2Padding.value = 0;
-    setTimeout(() => ring1Padding.value = withSpring(ring1Padding.value + hp(2)), 100);
-    setTimeout(() => ring2Padding.value = withSpring(ring2Padding.value + hp(5)), 300);
+    // Animation for logo rings 
+    ring1Padding.value = 0; // First ring
+    ring2Padding.value = 0; // Second ring
+    setTimeout(() => ring1Padding.value = withSpring(ring1Padding.value + hp(2)), 100); // settime 1ms 
+    setTimeout(() => ring2Padding.value = withSpring(ring2Padding.value + hp(5)), 300); // settime 3ms
+
+    // Use Nagivation to navigate to home screen after 2 second
+    setTimeout(() => navigation.navigate('Home'), 1500)
   }, [])
+
+
   return (
-    <View className="flex flex-1 justify-center items-center space-y-5 bg-orange-300">
-      <StatusBar animated={true} backgroundColor="#fdba74" barStyle="dark-content" />
+    <View className="flex flex-1 justify-center items-center space-y-5 bg-orange-500" >
+      <StatusBar animated={true} backgroundColor="#f97316" barStyle="dark-content" />
       {/* Logo Image */}
       <Animated.View className="bg-white/60 rounded-full" style={{ padding: ring2Padding }}>
         <Animated.View className="bg-white rounded-full" style={{ padding: ring1Padding }}>
@@ -23,8 +33,8 @@ function WelcomeScreen({ navigation }) {
         </Animated.View>
       </Animated.View>
 
-      {/* Title and Punchline */}
-      <View className="flex space-y-2 items-center">
+      {/*Title and Punchline */}
+      <View className="flex space-y-2 items-center" >
         <Text style={{ fontSize: hp(2.2) }} className="text-white font-bold tracking-wider">
           Elevate Every Look, Fashy Hook
         </Text>
