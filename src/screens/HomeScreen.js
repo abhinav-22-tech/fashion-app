@@ -1,11 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, StatusBar, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
 import { BellIcon, HeartIcon, ShoppingCartIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
+  // let isActive = false;
+  // let activeButtonClass = isActive ? ' bg-amber-400' : ' bg-black/10';
+  
+  const [isActive, setIsActive] = useState(false);
+
+  const handleIsActive = () => {
+    setIsActive(!isActive);
+    // withSpring(activePadding.value + hp(2))
+  }
+
   return (
     <View className="flex flex-1 bg-white" style={{ padding: hp(1.7) }}>
       <StatusBar animated={true} backgroundColor="white" barStyle="dark-content" />
@@ -50,15 +61,45 @@ function HomeScreen({ navigation }) {
         {/* Category */}
         <ScrollView
           horizontal
-          className="space-x-4 bg-red-700"
+          className="space-x-7"
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 15 }}
         >
           <TouchableOpacity className="flex items-center space-y-1">
-            <View style={{ padding: hp(0.7) }}>
-              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(20), height: (hp(20)) }} />
+            <View className={"rounded-lg items-center"}>
+              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Men</Text>
             </View>
           </TouchableOpacity>
+
+          <TouchableOpacity className="flex items-center space-y-1">
+            <View className={"rounded-lg items-center"}>
+              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Women</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity className="flex items-center space-y-1">
+            <View className={"rounded-lg items-center"}>
+              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Kids</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity className="flex items-center space-y-1">
+            <View className={"rounded-lg items-center"}>
+              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Footwear</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity className="flex items-center space-y-1">
+            <View className={"rounded-lg items-center"}>
+              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Winter Wear</Text>
+            </View>
+          </TouchableOpacity>
+
         </ScrollView>
 
 
