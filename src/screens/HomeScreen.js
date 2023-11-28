@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, StatusBar, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, Image, StatusBar, Button, TextInput, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
-import { BellIcon, HeartIcon, ShoppingCartIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+import { BellIcon, HeartIcon, ShoppingCartIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline';
+
+import { collectionData } from '../constants';
 
 function HomeScreen() {
   // let isActive = false;
   // let activeButtonClass = isActive ? ' bg-amber-400' : ' bg-black/10';
-  
+
   const [isActive, setIsActive] = useState(false);
 
   const handleIsActive = () => {
@@ -74,34 +76,46 @@ function HomeScreen() {
 
           <TouchableOpacity className="flex items-center space-y-1">
             <View className={"rounded-lg items-center"}>
-              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Image source={require('../assets/images/model-women.png')} style={{ width: hp(8), height: hp(7.1) }} />
               <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Women</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity className="flex items-center space-y-1">
             <View className={"rounded-lg items-center"}>
-              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Image source={require('../assets/images/model-kids.png')} style={{ width: hp(8), height: hp(7.1) }} />
               <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Kids</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity className="flex items-center space-y-1">
             <View className={"rounded-lg items-center"}>
-              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
-              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Footwear</Text>
+              <Image source={require('../assets/images/winter-wear.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Winter Wear</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity className="flex items-center space-y-1">
             <View className={"rounded-lg items-center"}>
-              <Image source={require('../assets/images/model-men.png')} style={{ width: hp(8), height: hp(7.1) }} />
-              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Winter Wear</Text>
+              <Image source={require('../assets/images/footwear.png')} style={{ width: hp(8), height: hp(7.1) }} />
+              <Text className="text-base tracking-wider text-black" style={{ fontSize: hp(1.8) }}>Footwear</Text>
             </View>
           </TouchableOpacity>
 
         </ScrollView>
 
+        {/* Collections */}
+        <View className="">
+          <Text style={{ fontSize: hp(3) }} className="text-neutral-700 font-semibold">New Collections</Text>
+          <View className="flex">
+            <FlatList
+              data={collectionData}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+              numColumns={2}
+            />
+          </View>
+        </View>
 
       </ScrollView>
 
@@ -113,6 +127,15 @@ function HomeScreen() {
     </View >
   );
 }
+
+const renderItem = ({ item }) => (
+  <View className="flex flex-1 justify-around" style={{ width: '100%', paddingLeft: 5, paddingRight: 5 }}>
+    <Image style={{ width: '100%', height: hp(35), borderRadius: 10 }}
+      className="bg-black/5" source={require('../assets/images/Dummy-women.png')} />
+    <Text>{item.name}</Text>
+  </View>
+);
+
 export default HomeScreen;
 
 {/* <Button
