@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface MyntraTests : XCTestCase
+@interface FashyFashionTests : XCTestCase
 
 @end
 
-@implementation MyntraTests
+@implementation FashyFashionTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

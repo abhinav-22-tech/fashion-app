@@ -15,11 +15,6 @@ export const collectionData = [
     image: "require('../assets/images/Dummy-women.png')"
   },
   {
-    id: 3,
-    name: 'Dessert',
-    image: "require('../assets/images/Dummy-women.png')"
-  },
-  {
     id: 4,
     name: 'Dessert',
     image: "require('../assets/images/Dummy-women.png')"
@@ -58,18 +53,23 @@ export const collectionData = [
     id: 11,
     name: 'Dessert',
     image: "require('../assets/images/Dummy-women.png')"
-  }, {
+  },
+  {
     id: 12,
     name: 'Dessert',
     image: "require('../assets/images/Dummy-women.png')"
-  },
-  {
+  }, {
     id: 13,
     name: 'Dessert',
     image: "require('../assets/images/Dummy-women.png')"
   },
   {
     id: 14,
+    name: 'Dessert',
+    image: "require('../assets/images/Dummy-women.png')"
+  },
+  {
+    id: 15,
     name: 'Dessert',
     image: "require('../assets/images/Dummy-women.png')"
   }

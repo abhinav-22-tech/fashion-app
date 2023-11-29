@@ -25,7 +25,7 @@ function WelcomeScreen() {
 
   return (
     <View className="flex flex-1 justify-center items-center space-y-5 bg-orange-500" >
-      <StatusBar animated={true} backgroundColor="#f97316" barStyle="dark-content" />
+      <StatusBar animated={true} backgroundColor="#f97316" barStyle="light-content" />
       {/* Logo Image */}
       <Animated.View className="bg-white/60 rounded-full" style={{ padding: ring2Padding }}>
         <Animated.View className="bg-white rounded-full" style={{ padding: ring1Padding }}>
@@ -39,11 +39,6 @@ function WelcomeScreen() {
           Elevate Every Look, Fashy Hook
         </Text>
       </View>
-
-      {/* <Button
-        title="Get Started"
-        onPress={() => navigation.navigate('Home')}
-      /> */}
     </View>
   );
 }
