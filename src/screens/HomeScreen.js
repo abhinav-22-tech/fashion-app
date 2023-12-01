@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, Image, StatusBar, Button, TextInput, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState, useCallback } from 'react';
+import {
+  Text, View, Image, StatusBar, Button, TextInput, ScrollView, TouchableOpacity, FlatList,
+  BackHandler, Alert
+} from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 
@@ -22,6 +25,28 @@ function HomeScreen() {
     setIsActive(!isActive);
     // withSpring(activePadding.value + hp(2))
   }
+
+  // Back button disable in HomeScreen 
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Hold on!", "Are you sure you want to Exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+
+    }, []));
 
   return (
     <View className="flex flex-1 bg-white" style={{ padding: hp(1.1) }}>

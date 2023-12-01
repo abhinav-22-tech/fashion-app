@@ -31,8 +31,16 @@ function Collections() {
   );
 }
 
+
+
 const CollectionCard = ({ item, index }) => {
   const [heartIconColorState, setHeartIconColorState] = useState("white");
+
+  const navigation = useNavigation();
+
+  const handleNavigationToCollection = () => {
+    navigation.navigate('Collection')
+  }
 
   const handleHeartIconState = () => {
     setHeartIconColorState((prevColor) => (prevColor === 'white' ? 'red' : 'white'));
@@ -43,7 +51,7 @@ const CollectionCard = ({ item, index }) => {
       <Pressable
         className="flex flex-1 justify-center"
         style={{ width: '100%', paddingLeft: hp(0.5), paddingRight: hp(0.5), marginBottom: hp(1.5) }}
-        onPress={() => console.log('Collection Pressed')}>
+        onPress={handleNavigationToCollection}>
         {/* Image of Product */}
         <View className="relative flex-1">
           <Image style={{ width: '100%', height: hp(28), borderRadius: 10 }}
@@ -58,7 +66,7 @@ const CollectionCard = ({ item, index }) => {
         <View className="flex">
           <Text style={{ fontSize: hp(1.9) }}
             className="font-bold text-neutral-950 tracking-wide">
-            Company name
+            Fashy Fashion
           </Text>
           <Text style={{ fontSize: hp(1.6) }}
             className="text-neutral-600 font-semibold tracking-wide">
@@ -81,7 +89,6 @@ const CollectionCard = ({ item, index }) => {
               </Text>
             </LinearGradient>
           </View>
-
         </View>
       </Pressable>
     </Animated.View>
