@@ -18,8 +18,8 @@ import Animated, {
   FadeInDown,
 } from 'react-native-reanimated';
 import MasonryList from '@react-native-seoul/masonry-list';
-import {TagIcon} from 'react-native-heroicons/outline';
-import {HeartIcon} from 'react-native-heroicons/solid';
+import {TagIcon, HeartIcon} from 'react-native-heroicons/outline';
+// import {HeartIcon} from 'react-native-heroicons/solid';
 import LinearGradient from 'react-native-linear-gradient';
 import axios from 'axios';
 
@@ -36,7 +36,8 @@ function Collections() {
     try {
       const response = await axios.get(
         // 'http://192.168.0.107:3000/api/products',
-        'https://raw.githubusercontent.com/abhinav-22-tech/fashion-json-data/main/index.json',
+        // 'https://raw.githubusercontent.com/abhinav-22-tech/fashion-json-data/main/index.json',
+        'https://gist.githubusercontent.com/abhinav-22-tech/2d6e550487098686757027ea6bf8d89c/raw/920f510898158d108539e50e7083184bbd5ab245/gistfile1.json',
       );
       // console.log('API data: ' + response.data);
       if (response && response.data) {
@@ -48,7 +49,7 @@ function Collections() {
   };
 
   return (
-    <View>
+    <View className="">
       {/* Collections */}
       <Text
         style={{fontSize: hp(3), padding: hp(1)}}
@@ -68,6 +69,7 @@ function Collections() {
             numColumns={2}
             showsVerticalScrollIndicator={false}
             onEndReachedThreshold={0.1}
+            contentContainerStyle={{paddingBottom: hp(1.5)}}
           />
         )}
       </View>
@@ -77,6 +79,7 @@ function Collections() {
 
 const CollectionCard = ({item, index}) => {
   const [heartIconColorState, setHeartIconColorState] = useState('white');
+  const [discount, setDiscount] = useState(0);
 
   const navigation = useNavigation();
 
@@ -89,6 +92,19 @@ const CollectionCard = ({item, index}) => {
       prevColor === 'white' ? 'red' : 'white',
     );
   };
+
+  const findDiscountOff = () => {
+    const previousPrice = item.previousPrice;
+    const price = item.price;
+
+    let result = ((previousPrice - price) * 100) / previousPrice;
+    result = parseInt(result);
+    setDiscount(result);
+  };
+
+  useEffect(() => {
+    findDiscountOff();
+  }, []);
 
   return (
     <Animated.View
@@ -117,9 +133,12 @@ const CollectionCard = ({item, index}) => {
             style={{top: hp(0.8), right: hp(1)}}
             onPress={handleHeartIconState}>
             <HeartIcon
-              color={heartIconColorState}
+              color={
+                heartIconColorState !== 'white' ? heartIconColorState : 'black'
+              }
               size={hp(3)}
-              strokeWidth={2.5}
+              strokeWidth={0.2}
+              fill={heartIconColorState}
             />
           </TouchableOpacity>
         </View>
@@ -159,7 +178,7 @@ const CollectionCard = ({item, index}) => {
                 <Text
                   style={{fontSize: hp(1.3), paddingTop: hp(0.1)}}
                   className="font-bold tracking-wide ml-1 text-white">
-                  67% OFF!
+                  {discount}% OFF!
                 </Text>
               </LinearGradient>
             )}

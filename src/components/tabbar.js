@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  StyleSheet,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -18,40 +19,37 @@ import {
 import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 
 import {
-  BellIcon,
   HeartIcon,
   ShoppingCartIcon,
+  HomeIcon,
+  UserCircleIcon,
 } from 'react-native-heroicons/outline';
 
+function Tabbar() {
 
-function Header() {
   return (
     <View
-      className="flex-row justify-between items-center"
+      className="flex flex-1 absolute z-10 overflow-hidden border border-gray-300 rounded-full"
       style={{
-        marginBottom: hp(1.3),
-        paddingLeft: hp(0.8),
-        paddingRight: hp(0.8),
+        bottom: hp(1),
+        left: hp(2),
+        right: hp(2),
       }}>
-      {/* Brand Logo */}
-      <Image
-        source={require('../assets/images/Fashy.png')}
-        style={{height: hp(5), width: hp(13)}}
-      />
-      <View className="flex-row items-center space-x-3">
-        {/* Cart Icon */}
+      <View
+        className="flex-row justify-between items-center bg-white"
+        style={{
+          paddingTop: hp(1.5),
+          paddingBottom: hp(1.5),
+          paddingRight: hp(2),
+          paddingLeft: hp(2),
+        }}>
+        <HomeIcon color="black" size={hp(4)} />
         <ShoppingCartIcon color="gray" size={hp(4)} />
-        {/* Wishlist */}
         <HeartIcon color="gray" size={hp(4)} />
-        {/* Notification */}
-        <View
-          className="flex bg-orange-300 rounded-full items-center"
-          style={{padding: hp(0.7)}}>
-          <BellIcon color="black" size={hp(3.5)} />
-        </View>
+        <UserCircleIcon color="gray" size={hp(4)} />
       </View>
     </View>
   );
 }
 
-export default Header;
+export default Tabbar;

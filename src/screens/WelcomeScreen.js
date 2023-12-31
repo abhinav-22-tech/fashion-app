@@ -19,7 +19,7 @@ function WelcomeScreen() {
     setTimeout(() => ring2Padding.value = withSpring(ring2Padding.value + hp(5)), 300); // settime 3ms
 
     // Use Nagivation to navigate to home screen after 2 second
-    setTimeout(() => navigation.navigate('Home'), 400)
+    setTimeout(() => navigation.navigate('Home'), 500)
   }, [])
 
 
