@@ -23,10 +23,13 @@ import {TagIcon, HeartIcon} from 'react-native-heroicons/outline';
 import LinearGradient from 'react-native-linear-gradient';
 import axios from 'axios';
 
+import Loading from './loading';
+
 // import {collectionData} from '../constants';
 
 function Collections() {
   const [collectionData, setCollectionData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getProducts();
@@ -42,6 +45,7 @@ function Collections() {
       // console.log('API data: ' + response.data);
       if (response && response.data) {
         setCollectionData(response.data);
+        setLoading(false);
       }
     } catch (err) {
       console.log('error: ', err.message);
@@ -57,10 +61,8 @@ function Collections() {
         New Collections
       </Text>
       <View className="flex">
-        {collectionData.length === 0 ? (
-          <Text className="text-neutral-700 font-semibold tracking-wider">
-            Hello buddy
-          </Text>
+        {loading ? (
+          <Loading size="large" className="mt-24" color="#fb923c" />
         ) : (
           <MasonryList
             data={collectionData}

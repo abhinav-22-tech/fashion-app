@@ -26,6 +26,17 @@ import {
 } from 'react-native-heroicons/outline';
 
 function Tabbar() {
+  const [tabbarSelective, setTabbarSelective] = useState(0);
+
+  const navigation = useNavigation();
+
+  const handleSelect = index => {
+    setTabbarSelective(index);
+    if (index === 0) navigation.navigate('Home');
+    else if (index === 1) navigation.navigate('Cart');
+    else if (index === 2) navigation.navigate('Wishlist');
+    else if (index === 3) navigation.navigate('Profile');
+  };
 
   return (
     <View
@@ -43,10 +54,34 @@ function Tabbar() {
           paddingRight: hp(2),
           paddingLeft: hp(2),
         }}>
-        <HomeIcon color="black" size={hp(4)} />
-        <ShoppingCartIcon color="gray" size={hp(4)} />
-        <HeartIcon color="gray" size={hp(4)} />
-        <UserCircleIcon color="gray" size={hp(4)} />
+        <TouchableOpacity onPress={() => handleSelect(0)}>
+          <HomeIcon
+            color={tabbarSelective === 0 ? 'orange' : 'gray'}
+            size={hp(4)}
+            strokeWidth={tabbarSelective === 0 ? hp(0.3) : hp(0.2)}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleSelect(1)}>
+          <ShoppingCartIcon
+            color={tabbarSelective === 1 ? 'orange' : 'gray'}
+            size={hp(4)}
+            strokeWidth={tabbarSelective === 1 ? hp(0.3) : hp(0.2)}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleSelect(2)}>
+          <HeartIcon
+            color={tabbarSelective === 2 ? 'orange' : 'gray'}
+            size={hp(4)}
+            strokeWidth={tabbarSelective === 2 ? hp(0.3) : hp(0.2)}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleSelect(3)}>
+          <UserCircleIcon
+            color={tabbarSelective === 3 ? 'orange' : 'gray'}
+            size={hp(4)}
+            strokeWidth={tabbarSelective === 3 ? hp(0.3) : hp(0.2)}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
